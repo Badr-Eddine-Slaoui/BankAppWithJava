@@ -1,0 +1,63 @@
+@startuml
+
+abstract class Account{
+    + code : String
+    + balance : double
+    + operationsList : Operation
+    + withdraw() : void
+    + calculateIntrest() : double
+    + displayDetails() : void
+}
+
+class CurrentAccount{
+    + overdraft : int
+}
+
+class SavingAccount{
+    + interestRate : double
+}
+
+abstract class Operation{
+    + id : UUID
+    + date : LocaleDateTime
+    + amount : double
+}
+
+class Deposit{
+    source : SourceEnum
+}
+
+class Withdrawal{
+    destination : DestinationEnum
+}
+
+class Transfer{
+    senderCode : String
+    receiverCode : String
+}
+
+enum SourceEnum{
+    EXTERNAL_TRANSFER
+    CASH_DEPOSIT
+    SALARY
+}
+
+enum DestinationEnum{
+    ATM
+    CHECK
+    OUTGOING_TRANSFER
+}
+
+CurrentAccount --|> Account
+SavingAccount --|> Account
+
+Operation -- Account
+
+Deposit --|> Operation
+Withdrawal --|> Operation
+Transfer --|> Operation
+
+SourceEnum -- Deposit
+DestinationEnum -- Withdrawal
+
+@enduml

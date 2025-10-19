@@ -1,0 +1,117 @@
+@startuml
+
+abstract class Account{
+    + code : String
+    + balance : double
+    + operationsList : Operation
+    + withdraw() : void
+    + calculateIntrest() : double
+    + displayDetails() : void
+}
+
+class CurrentAccount{
+    + overdraft : int
+}
+
+class SavingAccount{
+    + interestRate : double
+}
+
+abstract class Operation{
+    + id : UUID
+    + date : LocaleDateTime
+    + amount : double
+}
+
+class Deposit{
+    source : SourceEnum
+}
+
+class Withdrawal{
+    destination : DestinationEnum
+}
+
+enum SourceEnum{
+    EXTERNAL_TRANSFER
+    CASH_DEPOSIT
+    SALARY
+}
+
+enum DestinationEnum{
+    ATM
+    CHECK
+    OUTGOING_TRANSFER
+}
+
+class BankService{
+    + accounts: Map<String, Account>
+    + createCurrentAccount(code : String, balance : double, overdraft : int) : void
+    + createSavingsAccount(code : String, balance : double, rate : double) : void
+    + deposit(code : String, amount : double, source : SourceEnum) : void
+    + withdraw(code : String, amount : double, destination : DestinationEnum) : void
+    + transfer(srcCode, destCode, amount : double)
+    + checkBalance(code : String): double
+    + listOperations(code : String): List<Operation>
+    + filterAccounts(type : String): Stream<Account>
+    + findAccount(code : String): Optional<Account>
+}
+
+class DBConnection{
+    + url: String
+    + username: String
+    + password: String
+    + getConnection(): Connection
+    + close() : void
+}
+
+class AccountDAO{
+    + db : DBConnection
+    + save(account: Account): void
+    + findByCode(code: String): Optional<Account>
+    + findAll(): List<Account>
+    + updateBalance(code: String, balance: double): void
+}
+
+class OperationDAO{
+    + db : DBConnection
+    + save(operation: Operation, accountCode: String): void
+    + findByAccount(code: String): List<Operation>
+}
+
+class ValidationUtil{
+    + isValidCode(code: String): boolean
+    + isValidAmount(amount: double): boolean
+}
+
+class BankAppUI{
+    + showMenu(): void
+    + handleChoice(): void
+    + main(args: String[]): void
+}
+
+CurrentAccount "1 1" --|> "1 1" Account
+SavingAccount "1 1" --|> "1 1" Account
+
+Operation "1 *" --* "* 1" Account
+
+Deposit "1 1" --|> "1 1" Operation
+Withdrawal "1 1" --|> "1 1" Operation
+
+SourceEnum "1 *" --* "* 1" Deposit
+DestinationEnum "1 *" --* "* 1" Withdrawal
+
+BankService ..* Account
+BankService ..> Deposit
+BankService ..> Withdrawal
+BankService ..> OperationDAO
+BankService ..> CurrentAccount
+BankService ..> SavingAccount
+BankService ..> AccountDAO
+BankService ..> ValidationUtil
+
+OperationDAO --* DBConnection
+AccountDAO --* DBConnection
+
+BankAppUI --> BankService
+
+@enduml

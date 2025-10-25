@@ -2,6 +2,7 @@
 
 abstract class Account{
     + code : String
+    + userName : String
     + balance : double
     + operationsList : Operation
     + withdraw() : void

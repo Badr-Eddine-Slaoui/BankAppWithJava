@@ -1,14 +1,18 @@
 package command;
 
+import dto.SavingAccountDTO;
 import service.BankService;
 
 public class CreateSavingAccountCommand extends Command{
-    public CreateSavingAccountCommand(BankService bankService) {
+    private final SavingAccountDTO accountDTO;
+
+    public CreateSavingAccountCommand(BankService bankService, SavingAccountDTO accountDTO) {
         super(bankService);
+        this.accountDTO = accountDTO;
     }
 
     @Override
     public void execute() {
-        bankService.createSavingAccount();
+        bankService.createSavingAccount(this.accountDTO);
     }
 }

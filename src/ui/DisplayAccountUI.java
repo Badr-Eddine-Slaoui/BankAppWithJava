@@ -1,30 +1,30 @@
 package ui;
 
+
 import controller.AccountController;
 import util.HandleInput;
 import util.ValidatInput;
 
-public class DisplayOperationsUI implements UI{
+public class DisplayAccountUI implements UI {
 
     private final AccountController controller;
 
-    public DisplayOperationsUI(AccountController controller){
+    public DisplayAccountUI(AccountController controller){
         this.controller = controller;
     }
 
     @Override
-    public void start(){
+    public void start() {
         try {
             String code = HandleInput.getString("Enter the account code: ");
             ValidatInput.isValidCode(code);
 
-            controller.displayOperations(code);
+            controller.displayAccount(code);
         } catch (Exception e) {
             System.out.println("Unexpected Error : " + e.getMessage());
         }
     }
 
     @Override
-    public void showMenu(){}
-
+    public void showMenu() {}
 }

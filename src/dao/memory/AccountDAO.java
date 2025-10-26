@@ -6,6 +6,7 @@ import mapper.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class AccountDAO {
     private final Map<String, Account> accounts;
@@ -18,8 +19,8 @@ public class AccountDAO {
         accounts.put(account.getCode(), account);
     }
 
-    public Account getAccount(String code) {
-        return accounts.get(code);
+    public Optional<Account> getAccount(String code) {
+        return Optional.ofNullable(accounts.get(code));
     }
 
     public List<Operation> getOperations(String code) {

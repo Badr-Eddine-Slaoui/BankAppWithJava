@@ -1,35 +1,41 @@
 package service;
 
+import dto.*;
+
 public class BankService {
-    public void createCurrentAccount(){
+    public void createCurrentAccount(CurrentAccountDTO accountDTO){
 
     }
 
-    public void createSavingAccount(){
+    public void createSavingAccount(SavingAccountDTO accountDTO){
 
     }
 
-    public void deposit(){
+    public void deposit(String code, DepositDTO depositDTO){
 
     }
 
-    public void withdraw(){
+    public void withdraw(String code, WithdrawalDTO withdrawalDTO){
 
     }
 
-    public void transfer(){
+    public void transfer(TransferDTO transferDTO){
 
     }
 
-    public void displayBalance(){
+    public void displayBalance(String code){
 
     }
 
-    public void displayOperations(){
+    public void displayOperations(String code){
 
     }
 
-    public void searchAccount(){
+    public void displayAccount(String code){
+
+    }
+
+    public void searchAccount(String code){
 
     }
 }

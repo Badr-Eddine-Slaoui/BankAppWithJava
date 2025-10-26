@@ -1,7 +1,7 @@
 package entity;
 
 import exeption.InsufficientBalanceException;
-import exeption.InvalidAmount;
+import exeption.InvalidAmountException;
 
 public class SavingAccount extends Account{
     private static final double interestRate = 0.05;
@@ -15,8 +15,8 @@ public class SavingAccount extends Account{
     }
 
     @Override
-    public void withdraw(double amount) throws InvalidAmount, InsufficientBalanceException {
-        if (amount <= 0 ) throw new InvalidAmount("Amount must be positive");
+    public void withdraw(double amount) throws InvalidAmountException, InsufficientBalanceException {
+        if (amount <= 0 ) throw new InvalidAmountException("Amount must be positive");
         if (getBalance() - amount < 0 ) throw new InsufficientBalanceException("Insufficient balance");
         setBalance(getBalance() - amount);
     }

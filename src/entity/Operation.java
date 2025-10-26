@@ -1,6 +1,6 @@
 package entity;
 
-import exeption.InvalidAmount;
+import exeption.InvalidAmountException;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -27,9 +27,9 @@ public abstract class Operation {
         return amount;
     }
 
-    public void setAmount(double amount) throws InvalidAmount {
+    public void setAmount(double amount) throws InvalidAmountException {
         if (amount > 0 ) this.amount = amount;
-        throw new InvalidAmount("Amount must be positive");
+        throw new InvalidAmountException("Amount must be positive");
     }
 
 }

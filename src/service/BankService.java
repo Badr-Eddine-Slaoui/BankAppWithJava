@@ -25,7 +25,7 @@ public class BankService {
 
     }
 
-    public void displayOperation(){
+    public void displayOperations(){
 
     }
 

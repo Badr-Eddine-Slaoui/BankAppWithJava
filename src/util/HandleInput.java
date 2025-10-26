@@ -9,7 +9,7 @@ public class HandleInput implements AutoCloseable{
         System.out.print(prompt);
 
         while (!scanner.hasNextInt()){
-            System.out.println("Invalid Input Please Try Again");
+            System.out.print("Invalid Input Please Try Again: ");
             scanner.next();
         }
         return scanner.nextInt();
@@ -19,13 +19,14 @@ public class HandleInput implements AutoCloseable{
         System.out.print(prompt);
 
         while (!scanner.hasNextDouble()){
-            System.out.println("Invalid Input Please Try Again");
+            System.out.print("Invalid Input Please Try Again: ");
             scanner.next();
         }
         return scanner.nextDouble();
     }
 
     public static String getString(String prompt){
+        scanner.nextLine();
         System.out.print(prompt);
         return scanner.nextLine();
     }

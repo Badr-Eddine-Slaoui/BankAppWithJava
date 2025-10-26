@@ -26,12 +26,15 @@ public class WithdrawUI implements UI{
             switch (choice){
                 case 1 : {
                     destination = DestinationEnum.ATM;
+                    break;
                 }
                 case 2 : {
                     destination = DestinationEnum.CHECK;
+                    break;
                 }
                 case 3 : {
                     destination = DestinationEnum.OUTGOING_TRANSFER;
+                    break;
                 }
                 case 4 : {
                     break;

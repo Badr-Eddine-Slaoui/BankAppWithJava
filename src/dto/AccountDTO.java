@@ -1,14 +1,21 @@
 package dto;
 
-import entity.Operation;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AccountDTO {
+    private String code;
     private String userName;
     private double balance;
     private List<OperationDTO> operationsList = new ArrayList<>();
+
+    public String getCode(){
+        return this.code;
+    }
+
+    public void setCode(String code){
+        this.code = code;
+    }
 
     public String getUserName(){
         return userName;
@@ -36,6 +43,7 @@ public abstract class AccountDTO {
 
     public void displayDetails(){
         System.out.println("========================================");
+        System.out.printf("| %-12s | %s%n", "Code", getCode());
         System.out.printf("| %-12s | %s%n", "Name", getUserName());
         if (this instanceof CurrentAccountDTO) {
             System.out.printf("| %-12s | Current Account%n", "Type");
@@ -46,5 +54,5 @@ public abstract class AccountDTO {
         }
         System.out.printf("| %-12s | %.2f DH%n", "Balance", getBalance());
         System.out.println("========================================");
-    };
+    }
 }

@@ -4,7 +4,6 @@ import entity.*;
 import mapper.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -21,9 +20,5 @@ public class AccountDAO {
 
     public Optional<Account> getAccount(String code) {
         return Optional.ofNullable(accounts.get(code));
-    }
-
-    public List<Operation> getOperations(String code) {
-        return accounts.get(code).getOperationsList();
     }
 }

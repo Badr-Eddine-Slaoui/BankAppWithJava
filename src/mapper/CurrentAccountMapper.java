@@ -13,17 +13,17 @@ public class CurrentAccountMapper implements Mapper<CurrentAccountDTO, CurrentAc
     @Override
     public CurrentAccountDTO toDTO(CurrentAccount currentAccount){
         CurrentAccountDTO currentAccountDTO = new CurrentAccountDTO();
+        currentAccountDTO.setCode(currentAccount.getCode());
         currentAccountDTO.setUserName(currentAccount.getUserName());
         currentAccountDTO.setBalance(currentAccount.getBalance());
         currentAccountDTO.setOperationsList(currentAccount
                 .getOperationsList()
                 .stream()
-                .map(operation -> {
-                    return operation instanceof Deposit ? new DepositMapper().toDTO((Deposit) operation)
+                .map(operation -> operation instanceof Deposit ? new DepositMapper().toDTO((Deposit) operation)
                             : operation instanceof Withdrawal ? new WithdrawalMapper().toDTO((Withdrawal) operation)
                             : operation instanceof Transfer ? new TransferMapper().toDTO((Transfer) operation)
-                            : null;
-                }).filter(Objects::nonNull)
+                            : null
+                ).filter(Objects::nonNull)
                 .collect(Collectors.toList()));
         return currentAccountDTO;
     }

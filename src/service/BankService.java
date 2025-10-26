@@ -1,6 +1,5 @@
 package service;
 
-import dao.memory.AccountDAO;
 import dto.*;
 import entity.*;
 import exeption.AccountNotFoundException;
@@ -19,17 +18,23 @@ public class BankService {
     public void createCurrentAccount(CurrentAccountDTO accountDTO){
         CurrentAccountMapper currentAccountMapper = new CurrentAccountMapper();
         CurrentAccount currentAccount = currentAccountMapper.toEntity(accountDTO);
+        accountDTO.setCode(currentAccount.getCode());
 
         repositoryManager.getAccountRepository().addAccount(currentAccount);
         System.out.println("Current account created successfully");
+        System.out.println("Account Details: ");
+        accountDTO.displayDetails();
     }
 
     public void createSavingAccount(SavingAccountDTO accountDTO){
         SavingAccountMapper savingAccountMapper = new SavingAccountMapper();
         SavingAccount savingAccount = savingAccountMapper.toEntity(accountDTO);
+        accountDTO.setCode(savingAccount.getCode());
 
         repositoryManager.getAccountRepository().addAccount(savingAccount);
         System.out.println("Saving account created successfully");
+        System.out.println("Account Details: ");
+        accountDTO.displayDetails();
     }
 
     public void deposit(String code, DepositDTO depositDTO) throws AccountNotFoundException{
@@ -42,6 +47,8 @@ public class BankService {
 
         account.setOperationsList(deposit);
         System.out.println("Deposit made successfully");
+        System.out.println("Operation Details: ");
+        System.out.println(depositDTO);
     }
 
     public void withdraw(String code, WithdrawalDTO withdrawalDTO) throws AccountNotFoundException{
@@ -54,6 +61,8 @@ public class BankService {
 
         account.setOperationsList(withdrawal);
         System.out.println("Withdrawal made successfully");
+        System.out.println("Operation Details: ");
+        System.out.println(withdrawalDTO);
     }
 
     public void transfer(TransferDTO transferDTO) throws AccountNotFoundException{
@@ -72,6 +81,8 @@ public class BankService {
         senderAccount.setOperationsList(transfer);
         receiverAccount.setOperationsList(transfer);
         System.out.println("Transfer made successfully");
+        System.out.println("Operation Details: ");
+        System.out.println(transferDTO);
     }
 
     public void displayBalance(String code) throws AccountNotFoundException{

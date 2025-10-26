@@ -47,21 +47,11 @@ public abstract class Account {
     }
 
     abstract public void withdraw(double amount);
-    abstract public double calculateIntrest();
-    public void displayDetails(){
-        System.out.println("========================================");
 
-        System.out.printf("| %-12s | %s%n", "Account", getCode());
-        System.out.printf("| %-12s | %s%n", "Name", getUserName());
-        if (this instanceof CurrentAccount) {
-            System.out.printf("| %-12s | Current Account%n", "Type");
-            System.out.printf("| %-12s | %.2f DH%n", "overdraft", ((CurrentAccount)this).getOverdraft());
-        } else if (this instanceof SavingAccount) {
-            System.out.printf("| %-12s | Saving Account%n", "Type");
-            System.out.printf("| %-12s | %.2f %% %n", "interest rate", ((SavingAccount)this).getInterestRate() * 100);
-        }
-        System.out.printf("| %-12s | %.2f DH%n", "Balance", getBalance());
-        System.out.println("========================================");
-    };
+    abstract public double calculateIntrest();
+
+    public void deposit(double amount){
+        setBalance(getBalance() + amount);
+    }
 
 }

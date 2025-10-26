@@ -15,8 +15,7 @@ public class CurrentAccount extends Account {
     }
 
     @Override
-    public void withdraw(double amount) throws InvalidAmountException, InsufficientBalanceException {
-        if (amount <= 0 ) throw new InvalidAmountException("Amount must be positive");
+    public void withdraw(double amount) throws InsufficientBalanceException {
         if (getBalance() - amount < overdraft) throw new InsufficientBalanceException("Insufficient balance");
         setBalance(getBalance() - amount);
     }

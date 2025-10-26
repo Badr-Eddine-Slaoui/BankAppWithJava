@@ -1,21 +1,30 @@
 package ui;
 
-import service.BankService;
+import controller.AccountController;
+import util.HandleInput;
+import util.ValidatInput;
 
-public class DisplayBalanceUI extends UI{
+public class DisplayBalanceUI implements UI{
 
-    public DisplayBalanceUI(BankService bankService){
-        super(bankService);
+    private final AccountController controller;
+
+    public DisplayBalanceUI(AccountController controller){
+        this.controller = controller;
     }
 
     @Override
     public void start(){
+        try {
+            String code = HandleInput.getString("Enter the account code: ");
+            ValidatInput.isValidCode(code);
 
+            controller.displayBalance(code);
+        } catch (Exception e) {
+            System.out.println("Unexpected Error : " + e.getMessage());
+        }
     }
 
     @Override
-    public void showMenu(){
-
-    }
+    public void showMenu(){}
 
 }

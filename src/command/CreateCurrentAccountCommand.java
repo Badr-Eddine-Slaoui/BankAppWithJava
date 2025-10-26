@@ -1,6 +1,5 @@
 package command;
 
-import dto.AccountDTO;
 import dto.CurrentAccountDTO;
 import service.BankService;
 

@@ -25,12 +25,15 @@ public class DepositUI implements UI{
             switch (choice){
                 case 1 : {
                     source = SourceEnum.EXTERNAL_TRANSFER;
+                    break;
                 }
                 case 2 : {
                     source = SourceEnum.CASH_DEPOSIT;
+                    break;
                 }
                 case 3 : {
                     source = SourceEnum.SALARY;
+                    break;
                 }
                 case 4 : {
                     break;

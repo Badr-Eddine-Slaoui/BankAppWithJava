@@ -1,10 +1,8 @@
 package entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 public abstract class Account {
     private final String code = "CPT-" + String.format("%05d", new Random().nextInt(99999) + 1);
@@ -15,23 +13,23 @@ public abstract class Account {
     public Account(String userName, double balance) {
         this.userName = userName;
         this.balance = balance;
-        this.operationsList = new ArrayList<Operation>();
+        this.operationsList = new ArrayList<>();
     }
 
     public String getCode() {
-        return code;
+        return this.code;
     }
 
     public String getUserName() {
-        return userName;
+        return this.userName;
     }
 
     public double getBalance() {
-        return balance;
+        return this.balance;
     }
 
     public List<Operation> getOperationsList() {
-        return operationsList;
+        return this.operationsList;
     }
 
     public void setUserName(String userName) {

@@ -3,12 +3,15 @@ package command;
 import service.BankService;
 
 public class DisplayOperationsCommand extends Command{
-    public DisplayOperationsCommand(BankService bankService) {
+    private final String code;
+
+    public DisplayOperationsCommand(BankService bankService, String code) {
         super(bankService);
+        this.code = code;
     }
 
     @Override
     public void execute() {
-        bankService.displayOperations();
+        bankService.displayOperations(code);
     }
 }

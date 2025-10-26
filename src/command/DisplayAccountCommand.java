@@ -2,16 +2,16 @@ package command;
 
 import service.BankService;
 
-public class DisplayBalanceCommand extends Command{
+public class DisplayAccountCommand extends Command{
     private final String code;
 
-    public DisplayBalanceCommand(BankService bankService, String code) {
+    public DisplayAccountCommand(BankService bankService, String code) {
         super(bankService);
         this.code = code;
     }
 
     @Override
     public void execute() {
-        bankService.displayBalance(code);
+        bankService.displayAccount(code);
     }
 }

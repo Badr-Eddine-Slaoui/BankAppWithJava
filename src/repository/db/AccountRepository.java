@@ -1,6 +1,6 @@
-package repository.file;
+package repository.db;
 
-import dao.file.AccountDAO;
+import dao.db.AccountDAO;
 import entity.*;
 import repository.Repository;
 
@@ -43,4 +43,5 @@ public class AccountRepository implements Repository {
     public List<Operation> getOperations(String code) {
         return accountDAO.getOperations(code);
     }
+
 }

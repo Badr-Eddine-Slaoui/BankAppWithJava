@@ -46,9 +46,8 @@ public class BankService {
         Account account = accountOptional.get();
 
         Deposit deposit = new DepositMapper().toEntity(depositDTO);
-        account.deposit(deposit.getAmount());
+        repositoryManager.getAccountRepository().deposit(account, deposit);
 
-        account.setOperationsList(deposit);
         System.out.println("Deposit made successfully");
         System.out.println("Operation Details: ");
         System.out.println(depositDTO);

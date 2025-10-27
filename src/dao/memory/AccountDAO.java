@@ -20,6 +20,24 @@ public class AccountDAO {
         return Optional.ofNullable(accounts.get(code));
     }
 
+    public void deposit(Account account, Deposit deposit) {
+        account.deposit(deposit.getAmount());
+        account.setOperationsList(deposit);
+    }
+
+    public void withdraw(Account account, Withdrawal withdrawal) {
+        account.withdraw(withdrawal.getAmount());
+        account.setOperationsList(withdrawal);
+    }
+
+    public void transfer(Account senderAccount, Account receiverAccount, Transfer transfer) {
+        senderAccount.withdraw(transfer.getAmount());
+        receiverAccount.deposit(transfer.getAmount());
+
+        senderAccount.setOperationsList(transfer);
+        receiverAccount.setOperationsList(transfer);
+    }
+
     public List<Operation> getOperations(String code) {
         Optional<Account> accountOptional = getAccount(code);
         if (accountOptional.isPresent()) {

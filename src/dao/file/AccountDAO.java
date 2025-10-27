@@ -7,23 +7,26 @@ import java.io.*;
 import java.util.*;
 
 public class AccountDAO {
-    private final String filePath = "../../../data/accounts.text";
+    private final String filePath = "data/accounts.text";
 
     @SuppressWarnings("unchecked")
     public void addAccount(Account account) {
         List<Account> accounts = new ArrayList<>();
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(this.filePath))){
-            accounts = (List<Account>) inputStream.readObject();
-            accounts.add(account);
-        }catch (FileNotFoundException e){
-            System.out.println("File not found");
-        }catch (IOException e){
-            System.out.println("IO Exception");
-        }catch (ClassNotFoundException e){
-            System.out.println("Class not found");
-        } catch (Exception e){
-            System.out.println("Unexpected Error : " + e.getMessage());
+        File file = new File(filePath);
+        if (file.exists() && file.length() > 0) {
+            try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(this.filePath))) {
+                accounts = (List<Account>) inputStream.readObject();
+            } catch (FileNotFoundException e) {
+                System.out.println("File not found");
+            } catch (IOException e) {
+                System.out.println("IO Exception");
+            } catch (ClassNotFoundException e) {
+                System.out.println("Class not found");
+            } catch (Exception e) {
+                System.out.println("Unexpected Error : " + e.getMessage());
+            }
         }
+        accounts.add(account);
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(this.filePath))){
             outputStream.writeObject(accounts);
         }catch (FileNotFoundException e){

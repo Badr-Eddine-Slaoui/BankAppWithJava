@@ -23,17 +23,23 @@ public class CreateAccountUI implements UI{
                     String name = HandleInput.getString("Enter your name: ");
                     ValidatInput.isValidName(name);
                     double balance = HandleInput.getDouble("Enter your balance: ");
+
                     controller.createCurrentAccount(name, balance);
+                    break;
                 }
                 case 2 : {
                     String name = HandleInput.getString("Enter your name: ");
                     ValidatInput.isValidName(name);
                     double balance = HandleInput.getDouble("Enter your balance: ");
-                    double interestRate = HandleInput.getDouble("Enter your interest rate: ");
+
                     controller.createSavingAccount(name, balance);
+                    break;
                 }
                 case 3 : {
                     break;
+                }
+                default : {
+                    System.out.println("Invalid Choice!");
                 }
             }
         }catch (Exception e){

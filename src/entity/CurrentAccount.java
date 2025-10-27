@@ -1,7 +1,6 @@
 package entity;
 
 import exeption.InsufficientBalanceException;
-import exeption.InvalidAmountException;
 
 public class CurrentAccount extends Account {
     private static final double overdraft = -300;

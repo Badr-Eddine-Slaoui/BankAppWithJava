@@ -33,25 +33,4 @@ public abstract class Operation implements Serializable {
         throw new InvalidAmountException("Amount must be positive");
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Operation [")
-                .append("uuid=").append(uuid)
-                .append(", date=").append(date)
-                .append(", amount=").append(amount);
-
-        if (this instanceof Deposit) {
-            sb.append(", source=").append(((Deposit) this).getSource());
-        } else if (this instanceof Withdrawal) {
-            sb.append(", destination=").append(((Withdrawal) this).getDestination());
-        } else if (this instanceof Transfer) {
-            sb.append(", receiver=").append(((Transfer) this).getReceiverCode())
-                    .append(", sender=").append(((Transfer) this).getSenderCode());
-        }
-
-        sb.append("]");
-        return sb.toString();
-    }
-
 }

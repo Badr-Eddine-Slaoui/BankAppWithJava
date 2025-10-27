@@ -1,8 +1,7 @@
 package repository.memory;
 
 import dao.memory.AccountDAO;
-import entity.Account;
-import entity.Operation;
+import entity.*;
 import repository.Repository;
 
 import java.util.List;
@@ -23,6 +22,21 @@ public class AccountRepository implements Repository {
     @Override
     public Optional<Account> getAccount(String code) {
         return accountDAO.getAccount(code);
+    }
+
+    @Override
+    public void deposit(Account account, Deposit deposit) {
+        accountDAO.deposit(account, deposit);
+    }
+
+    @Override
+    public void withdraw(Account account, Withdrawal withdrawal) {
+        accountDAO.withdraw(account, withdrawal);
+    }
+
+    @Override
+    public void transfer(Account senderAccount, Account receiverAccount, Transfer transfer) {
+        accountDAO.transfer(senderAccount, receiverAccount, transfer);
     }
 
     @Override

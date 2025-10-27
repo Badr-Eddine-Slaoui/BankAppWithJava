@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class Account implements Serializable {
-    private final String code = "CPT-" + String.format("%05d", new Random().nextInt(99999) + 1);
-    private String userName;
+    private String code = "CPT-" + String.format("%05d", new Random().nextInt(99999) + 1);
+    private final String userName;
     private double balance;
     private final List<Operation> operationsList;
 
@@ -19,6 +19,10 @@ public abstract class Account implements Serializable {
 
     public String getCode() {
         return this.code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getUserName() {
@@ -33,9 +37,9 @@ public abstract class Account implements Serializable {
         return this.operationsList;
     }
 
-    public void setUserName(String userName) {
+    /*public void setUserName(String userName) {
         this.userName = userName;
-    }
+    }*/
 
     public void setBalance(double balance) {
         this.balance = balance;

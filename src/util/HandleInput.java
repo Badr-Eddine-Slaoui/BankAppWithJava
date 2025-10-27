@@ -26,6 +26,7 @@ public class HandleInput implements AutoCloseable{
     }
 
     public static String getString(String prompt){
+        scanner.nextLine();
         System.out.print(prompt);
         return scanner.nextLine();
     }

@@ -2,10 +2,11 @@ package entity;
 
 import exeption.InvalidAmountException;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public abstract class Operation {
+public abstract class Operation implements Serializable {
 
     private final UUID uuid = UUID.randomUUID();
     private final LocalDateTime date = LocalDateTime.now();

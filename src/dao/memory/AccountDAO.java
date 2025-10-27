@@ -3,9 +3,7 @@ package dao.memory;
 import entity.*;
 import mapper.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class AccountDAO {
     private final Map<String, Account> accounts;
@@ -20,5 +18,13 @@ public class AccountDAO {
 
     public Optional<Account> getAccount(String code) {
         return Optional.ofNullable(accounts.get(code));
+    }
+
+    public List<Operation> getOperations(String code) {
+        Optional<Account> accountOptional = getAccount(code);
+        if (accountOptional.isPresent()) {
+            return accountOptional.get().getOperationsList();
+        }
+        return new ArrayList<>();
     }
 }

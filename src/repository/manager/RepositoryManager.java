@@ -1,7 +1,7 @@
 package repository.manager;
 
-import repository.memory.AccountRepository;
+import repository.Repository;
 
 public interface RepositoryManager {
-    AccountRepository getAccountRepository();
+    Repository getAccountRepository();
 }

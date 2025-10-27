@@ -6,7 +6,10 @@ import exeption.AccountNotFoundException;
 import mapper.*;
 import repository.manager.RepositoryManager;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class BankService {
     private final RepositoryManager repositoryManager;
@@ -96,15 +99,17 @@ public class BankService {
     }
 
     public void displayOperations(String code) throws AccountNotFoundException{
-        Optional<Account> accountOptional = repositoryManager.getAccountRepository().getAccount(code);
-        accountOptional.orElseThrow(() -> new AccountNotFoundException("Account not found"));
+        List<Operation> operations = repositoryManager.getAccountRepository().getOperations(code);
 
-        AccountDTO account = (accountOptional.get() instanceof CurrentAccount) ? new CurrentAccountMapper().toDTO((CurrentAccount) accountOptional.get())
-                : new SavingAccountMapper().toDTO((SavingAccount) accountOptional.get());
+        List<OperationDTO> operationsDTO = operations.stream().map(operation ->  (operation instanceof Deposit) ? new DepositMapper().toDTO((Deposit) operation)
+                    : (operation instanceof Withdrawal) ? new WithdrawalMapper().toDTO((Withdrawal) operation)
+                    : (operation instanceof Transfer) ? new TransferMapper().toDTO((Transfer) operation)
+                    : null
+        ).filter(Objects::nonNull).collect(Collectors.toList());
 
         System.out.println("Operations: ");
-        for (OperationDTO operation : account.getOperationsList()) {
-            System.out.println(operation);
+        for (OperationDTO operationDTO : operationsDTO) {
+            System.out.println(operationDTO);
         }
     }
 

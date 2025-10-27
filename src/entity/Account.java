@@ -1,10 +1,11 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Account {
+public abstract class Account implements Serializable {
     private final String code = "CPT-" + String.format("%05d", new Random().nextInt(99999) + 1);
     private String userName;
     private double balance;
